@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import VaporizeTextCycle from "./VaporizeText";
 
-const HERO_TEXTS = ["Faster, Better YouTube Downloader", "Save Any Video Now", "Fast & 100% Free"];
+const HERO_TEXTS = ["Faster, Better Video & Audio Downloader", "Save Any Video Now", "Fast & 100% Free"];
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
@@ -997,8 +997,8 @@ export default function ZapClip() {
 
   // ─── Step 1: URL validate karo, backend se video info fetch karo ──────
   const handleConvert = async () => {
-    if (!url.trim()) { setError("Please paste a YouTube URL first."); return; }
-    if (!validateUrl(url)) { setError("Invalid YouTube URL — please paste a valid link."); return; }
+    if (!url.trim()) { setError("Please paste a Video URL first."); return; }
+    if (!validateUrl(url)) { setError("Invalid Video URL — please paste a valid link."); return; }
     setError("");
     setResult(null);
     setDlStates({});
@@ -1124,7 +1124,7 @@ export default function ZapClip() {
 
         <div className="vaporize-wrap" style={{ position: "relative", zIndex: 1, height: "80px", width: "100%", marginBottom: "1.25rem" }}>
           <VaporizeTextCycle
-            texts={windowWidth < 480 ? ["Fast YouTube Downloader", "Save Any Video", "100% Free & Fast"] : HERO_TEXTS}
+            texts={windowWidth < 480 ? ["Fast Video & Audio Downloader", "Save Any Video", "100% Free & Fast"] : HERO_TEXTS}
             font={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontSize: windowWidth < 480 ? `${Math.floor(windowWidth / 18)}px` : windowWidth < 768 ? "32px" : "48px",
@@ -1152,7 +1152,7 @@ export default function ZapClip() {
             <div className="input-icon"><IconLink size={18} /></div>
             <input
               type="text"
-              placeholder="Paste YouTube video link here..."
+              placeholder="Paste your video link here..."
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleConvert()}
@@ -1262,7 +1262,7 @@ export default function ZapClip() {
         <div className="steps-row">
           <div className="steps-line" />
           {[
-            { icon: <IconClipboard />, title: "Paste Link", desc: "Copy the YouTube URL from your browser and paste it into the input bar above." },
+            { icon: <IconClipboard />, title: "Paste Link", desc: "Copy the Video URL from your browser and paste it into the input bar above." },
             { icon: <IconSliders />, title: "Choose Format", desc: "Pick your desired resolution for video or audio bitrate for MP3 conversion." },
             { icon: <IconDownload />, title: "Download", desc: "Your file is processed instantly and ready for download in seconds." },
           ].map((s, i) => (

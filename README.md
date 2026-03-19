@@ -1,4 +1,4 @@
-# ZapClip — Video Downloader
+# ZapClip — Video & Audio Downloader
 
 A fast, free video downloader supporting YouTube, Instagram, TikTok, Twitter/X, Facebook and 1000+ more sites.
 
