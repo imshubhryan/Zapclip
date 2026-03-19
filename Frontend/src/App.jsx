@@ -86,7 +86,7 @@ const styles = `
     align-items: center;
     gap: 8px;
   }
-  .nav-logo span { background: var(--brand-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .nav-logo .brand-highlight { background: var(--brand-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
   .nav-links {
     display: flex;
     gap: 2rem;
@@ -666,7 +666,7 @@ const styles = `
     color: var(--text);
     margin-bottom: 0.75rem;
   }
-  .footer-brand span { background: var(--brand-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .footer-brand .brand-highlight { background: var(--brand-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
   .footer-tagline {
     font-size: 0.85rem;
     color: var(--text3);
@@ -990,10 +990,10 @@ export default function ZapClip() {
     setTimeout(() => setToasts(p => p.filter(t => t.id !== id)), 3500);
   };
 
- const validateUrl = (v) => {
+  const validateUrl = (v) => {
     const regex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|instagram\.com|tiktok\.com|twitter\.com|x\.com|facebook\.com|vimeo\.com|reddit\.com).+/i;
     return regex.test(v.trim());
-};
+  };
 
   // ─── Step 1: URL validate karo, backend se video info fetch karo ──────
   const handleConvert = async () => {
@@ -1094,7 +1094,10 @@ export default function ZapClip() {
 
       {/* NAVBAR */}
       <nav className={`nav${scrolled ? " scrolled" : ""}`}>
-        <span className="nav-logo" style={{ cursor: "pointer" }} onClick={() => scrollTo("home")}>Zap<span>Clip</span></span>
+        <span className="nav-logo" style={{ cursor: "pointer" }} onClick={() => scrollTo("home")}>
+          <img src="/favicon.png" alt="ZapClip Logo" style={{ width: "32px", height: "32px", borderRadius: "6px" }} />
+          <span>Zap<span className="brand-highlight">Clip</span></span>
+        </span>
         <ul className="nav-links">
           <li><span className={`nav-link${activeSection === "features" ? " active" : ""}`} onClick={() => scrollTo("features")}>Features</span></li>
           <li><span className={`nav-link${activeSection === "how" ? " active" : ""}`} onClick={() => scrollTo("how")}>How-To-Use</span></li>
@@ -1172,19 +1175,19 @@ export default function ZapClip() {
         {result && (
           <div className="result-section">
             <div className="result-video-row">
-             {result.thumbnail ? (
-  <img 
-  src={result.thumbnail} 
-  alt="thumbnail"
-  crossOrigin="anonymous"
-  onError={(e) => { e.target.style.display = 'none'; }}
-  style={{ width: 100, height: 62, objectFit: "cover", borderRadius: 8, flexShrink: 0 }}
-/>
-) : (
-  <div className="thumb-placeholder">
-    <IconPlay style={{ color: "rgba(255,255,255,0.3)" }} />
-  </div>
-)}
+              {result.thumbnail ? (
+                <img
+                  src={result.thumbnail}
+                  alt="thumbnail"
+                  crossOrigin="anonymous"
+                  onError={(e) => { e.target.style.display = 'none'; }}
+                  style={{ width: 100, height: 62, objectFit: "cover", borderRadius: 8, flexShrink: 0 }}
+                />
+              ) : (
+                <div className="thumb-placeholder">
+                  <IconPlay style={{ color: "rgba(255,255,255,0.3)" }} />
+                </div>
+              )}
               <div className="result-info">
                 <div className="result-title">{result.title}</div>
                 <div className="result-meta">{result.channel} &middot; {result.views}</div>
@@ -1230,24 +1233,24 @@ export default function ZapClip() {
           <div className="floating-blob blob-3" style={{ top: '40%', opacity: 0.04 }} />
         </div>
         <div className="section-content">
-        <div className="section-eyebrow" style={{ textAlign: "center" }}>What you get</div>
-        <h2 className="section-title" style={{ margin: "0 auto 3.5rem", maxWidth: "100%", textAlign: "center" }}>Everything you need, nothing you don't</h2>
-        <div className="features-grid">
-          {[
-            { icon: <IconFilm />, title: "High-Quality MP4", desc: "1080p and 4K resolution without any quality loss during conversion." },
-            { icon: <IconMusic />, title: "320kbps MP3", desc: "Studio-grade audio extraction for your high-fidelity music library." },
-            { icon: <IconShield />, title: "No Registration", desc: "Quick, private, and secure. We never track your activity or require accounts." },
-            { icon: <IconInfinity />, title: "Unlimited", desc: "No daily limits, no hidden queues, and no throttled speeds for any user." },
-            { icon: <IconZap />, title: "Instant Processing", desc: "Our servers process your video in seconds, not minutes. No waiting." },
-            { icon: <IconFilm />, title: "All Formats", desc: "MP4, MP3, WebM and more. Every device, every player, covered." },
-          ].map((f, i) => (
-            <div className="feature-card" key={i}>
-              <div className="feature-icon">{f.icon}</div>
-              <h3>{f.title}</h3>
-              <p>{f.desc}</p>
-            </div>
-          ))}
-        </div>
+          <div className="section-eyebrow" style={{ textAlign: "center" }}>What you get</div>
+          <h2 className="section-title" style={{ margin: "0 auto 3.5rem", maxWidth: "100%", textAlign: "center" }}>Everything you need, nothing you don't</h2>
+          <div className="features-grid">
+            {[
+              { icon: <IconFilm />, title: "High-Quality MP4", desc: "1080p and 4K resolution without any quality loss during conversion." },
+              { icon: <IconMusic />, title: "320kbps MP3", desc: "Studio-grade audio extraction for your high-fidelity music library." },
+              { icon: <IconShield />, title: "No Registration", desc: "Quick, private, and secure. We never track your activity or require accounts." },
+              { icon: <IconInfinity />, title: "Unlimited", desc: "No daily limits, no hidden queues, and no throttled speeds for any user." },
+              { icon: <IconZap />, title: "Instant Processing", desc: "Our servers process your video in seconds, not minutes. No waiting." },
+              { icon: <IconFilm />, title: "All Formats", desc: "MP4, MP3, WebM and more. Every device, every player, covered." },
+            ].map((f, i) => (
+              <div className="feature-card" key={i}>
+                <div className="feature-icon">{f.icon}</div>
+                <h3>{f.title}</h3>
+                <p>{f.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section >
 
@@ -1257,24 +1260,24 @@ export default function ZapClip() {
           <div className="spotlight spotlight-left" />
         </div>
         <div className="section-content">
-        <div className="section-eyebrow">Simple process</div>
-        <h2 className="section-title" style={{ margin: "0 auto 0", textAlign: "center" }}>Simple in Three Steps</h2>
-        <div className="steps-row">
-          <div className="steps-line" />
-          {[
-            { icon: <IconClipboard />, title: "Paste Link", desc: "Copy the Video URL from your browser and paste it into the input bar above." },
-            { icon: <IconSliders />, title: "Choose Format", desc: "Pick your desired resolution for video or audio bitrate for MP3 conversion." },
-            { icon: <IconDownload />, title: "Download", desc: "Your file is processed instantly and ready for download in seconds." },
-          ].map((s, i) => (
-            <div className={`step${activeStep >= i ? " active" : ""}`} key={i}>
-              <div className="step-circle">{s.icon}</div>
-              <div className="step-content">
-                <h4>{s.title}</h4>
-                <p>{s.desc}</p>
+          <div className="section-eyebrow">Simple process</div>
+          <h2 className="section-title" style={{ margin: "0 auto 0", textAlign: "center" }}>Simple in Three Steps</h2>
+          <div className="steps-row">
+            <div className="steps-line" />
+            {[
+              { icon: <IconClipboard />, title: "Paste Link", desc: "Copy the Video URL from your browser and paste it into the input bar above." },
+              { icon: <IconSliders />, title: "Choose Format", desc: "Pick your desired resolution for video or audio bitrate for MP3 conversion." },
+              { icon: <IconDownload />, title: "Download", desc: "Your file is processed instantly and ready for download in seconds." },
+            ].map((s, i) => (
+              <div className={`step${activeStep >= i ? " active" : ""}`} key={i}>
+                <div className="step-circle">{s.icon}</div>
+                <div className="step-content">
+                  <h4>{s.title}</h4>
+                  <p>{s.desc}</p>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
         </div>
       </section >
 
@@ -1284,19 +1287,19 @@ export default function ZapClip() {
           <div className="spotlight spotlight-bottom" />
         </div>
         <div className="section-content">
-        <div className="section-eyebrow" style={{ textAlign: "center" }}>Got questions?</div>
-        <h2 className="section-title" style={{ margin: "0 auto 3rem", maxWidth: "100%", textAlign: "center" }}>Frequently asked questions</h2>
-        {
-          faqs.map((f, i) => (
-            <div className={`faq-item${openFaq === i ? " open" : ""}`} key={i}>
-              <button className="faq-q" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
-                {f.q}
-                <span className="faq-icon">+</span>
-              </button>
-              <div className="faq-body"><p>{f.a}</p></div>
-            </div>
-          ))
-        }
+          <div className="section-eyebrow" style={{ textAlign: "center" }}>Got questions?</div>
+          <h2 className="section-title" style={{ margin: "0 auto 3rem", maxWidth: "100%", textAlign: "center" }}>Frequently asked questions</h2>
+          {
+            faqs.map((f, i) => (
+              <div className={`faq-item${openFaq === i ? " open" : ""}`} key={i}>
+                <button className="faq-q" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
+                  {f.q}
+                  <span className="faq-icon">+</span>
+                </button>
+                <div className="faq-body"><p>{f.a}</p></div>
+              </div>
+            ))
+          }
         </div>
       </section >
 
@@ -1305,7 +1308,10 @@ export default function ZapClip() {
         <div className="footer-top">
           {/* Brand col */}
           <div>
-            <div className="footer-brand">Zap<span>Clip</span></div>
+            <div className="footer-brand" style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <img src="/favicon.png" alt="ZapClip Logo" style={{ width: "24px", height: "24px", borderRadius: "4px" }} />
+              <span>Zap<span className="brand-highlight">Clip</span></span>
+            </div>
             <div className="footer-tagline">
               Fast, free YouTube, Instagram, and TikTok video downloader. No signup, no limits, no nonsense.
             </div>
